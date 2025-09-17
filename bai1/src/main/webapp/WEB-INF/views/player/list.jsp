@@ -34,6 +34,9 @@
             <td>
                 <img src="${player.avatar}" alt="avatar" width="120" height="120" style="object-fit: cover;">
             </td>
+            <td>
+                <a href="<c:url value='/players/delete/${player.id}'/>" onclick="return confirm('Xác nhận xoá?')"></a>
+            </td>
         </tr>
     </c:forEach>
 </table>

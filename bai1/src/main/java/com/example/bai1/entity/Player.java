@@ -1,10 +1,13 @@
 package com.example.bai1.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Player {
     private int id;
     private String fullName;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dayOfBirth;
     private String experience;
     private String position;

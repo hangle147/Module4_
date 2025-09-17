@@ -30,4 +30,9 @@ public class PlayerRepository implements IPlayerRepository {
     public void add(Player player) {
         playerList.add(player);
     }
+
+    @Override
+    public void delete(int id) {
+        playerList.removeIf(player -> player.getId() == id);
+    }
 }

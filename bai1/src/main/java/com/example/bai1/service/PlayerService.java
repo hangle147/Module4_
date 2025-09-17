@@ -21,4 +21,9 @@ public class PlayerService implements IPlayerService{
     public void add(Player player) {
         playerRepository.add(player);
     }
+
+    @Override
+    public void delete(int id) {
+        playerRepository.delete(id);
+    }
 }

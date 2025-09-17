@@ -7,4 +7,5 @@ import java.util.List;
 public interface IPlayerRepository {
     List<Player> findAll();
     void add(Player player);
+    void delete(int id);
 }
