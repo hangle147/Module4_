@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/players")
 public class PlayerController {
     @Autowired
-    PlayerService playerService;
+    private PlayerService playerService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView showList() {
