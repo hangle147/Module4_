@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IPlayerService {
     List<Player> findAll();
+    Player findById(int id);
     void add(Player player);
-    void delete(int id);
 }

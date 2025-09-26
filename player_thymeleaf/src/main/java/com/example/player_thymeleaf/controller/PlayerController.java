@@ -35,10 +35,4 @@ public class PlayerController {
         redirectAttributes.addFlashAttribute("message", "Add success");
         return "redirect:/players";
     }
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        playerService.delete(id);
-        return "redirect:/players";
-    }
 }

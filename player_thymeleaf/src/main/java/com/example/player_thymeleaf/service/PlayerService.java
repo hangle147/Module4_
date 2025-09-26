@@ -18,12 +18,13 @@ public class PlayerService implements IPlayerService{
     }
 
     @Override
+    public Player findById(int id) {
+        return playerRepository.findById(id);
+    }
+
+    @Override
     public void add(Player player) {
         playerRepository.add(player);
     }
 
-    @Override
-    public void delete(int id) {
-        playerRepository.delete(id);
-    }
 }

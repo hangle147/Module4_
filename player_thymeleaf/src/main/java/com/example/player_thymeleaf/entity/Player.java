@@ -1,11 +1,19 @@
 package com.example.player_thymeleaf.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
+@Entity
 public class Player {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String fullName;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dayOfBirth;

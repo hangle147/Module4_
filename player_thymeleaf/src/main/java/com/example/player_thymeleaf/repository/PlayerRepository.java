@@ -1,38 +1,48 @@
 package com.example.player_thymeleaf.repository;
 
 import com.example.player_thymeleaf.entity.Player;
+import com.example.player_thymeleaf.utils.ConnectionUtil;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PlayerRepository implements IPlayerRepository {
-    private static List<Player> playerList = new ArrayList<>();
-    static {
-        playerList.add(new Player(
-                1,
-                "Nguyễn Văn A",
-                LocalDate.of(1995, 5, 20),   // 20/05/1995
-                "5 năm kinh nghiệm",
-                "Tiền đạo",
-                "https://i.pinimg.com/736x/c6/e5/65/c6e56503cfdd87da299f72dc416023d4.jpg"
-        ));
-    }
 
     @Override
     public List<Player> findAll() {
+        List <Player> playerList = new ArrayList<>();
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        TypedQuery<Player> query = session.createQuery("from Player");
+        playerList = query.getResultList();
+        session.close();
         return playerList;
     }
 
     @Override
-    public void add(Player player) {
-        playerList.add(player);
+    public Player findById(int id) {
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        Player player = session.find(Player.class, id);
+        session.close();
+        return player;
     }
 
     @Override
-    public void delete(int id) {
-        playerList.removeIf(player -> player.getId() == id);
+    public boolean add(Player player) {
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            transaction.begin();
+            session.persist(player);
+            transaction.commit();
+        }  catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }
+        return true;
     }
 }
