@@ -1,5 +1,6 @@
 package com.example.player_springboot.entity;
 
+import com.example.player_springboot.dto.PlayerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -30,5 +31,5 @@ public class Team {
     private String coach;
 
     @OneToMany(mappedBy = "team")
-    private List<Player> players;
+    private List<PlayerDTO> players;
 }
