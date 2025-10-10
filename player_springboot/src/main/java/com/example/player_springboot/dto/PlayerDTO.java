@@ -17,9 +17,11 @@ public class PlayerDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fullName;
-    private LocalDate dayOfBirth;
+    private String dayOfBirth;
     private String experience;
     private String position;
     private String avatar;
     private Integer teamId;
+
+
 }

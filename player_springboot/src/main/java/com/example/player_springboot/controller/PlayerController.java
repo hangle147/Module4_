@@ -3,6 +3,7 @@ package com.example.player_springboot.controller;
 import com.example.player_springboot.dto.PlayerDTO;
 import com.example.player_springboot.service.PlayerService;
 import com.example.player_springboot.service.TeamService;
+import com.example.player_springboot.validate.PlayerValidate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class PlayerController {
 
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private PlayerValidate playerValidate;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showList() {
@@ -40,6 +44,7 @@ public class PlayerController {
                        BindingResult bindingResult,
                        RedirectAttributes redirectAttributes,
                        Model model) {
+        playerValidate.validate(playerDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("teams", teamService.findAll());
             return "player/add";

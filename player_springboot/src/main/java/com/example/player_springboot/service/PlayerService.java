@@ -8,6 +8,7 @@ import com.example.player_springboot.repository.ITeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -32,15 +33,15 @@ public class PlayerService implements IPlayerService{
     @Override
     public boolean add(PlayerDTO playerDTO) {
         Team team = teamRepository.findById(playerDTO.getTeamId()).orElseThrow(() -> new IllegalArgumentException("Team Not Found"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        Player player = new Player();
-        player.setFullName(playerDTO.getFullName());
-        player.setDayOfBirth(playerDTO.getDayOfBirth());
-        player.setExperience(playerDTO.getExperience());
-        player.setPosition(playerDTO.getPosition());
-        player.setAvatar(playerDTO.getAvatar());
-        player.setTeam(team);
+        playerDTO.setFullName(playerDTO.getFullName());
+        playerDTO.setDayOfBirth(playerDTO.getDayOfBirth(), formatter);
+        playerDTO.setExperience(playerDTO.getExperience());
+        playerDTO.setPosition(playerDTO.getPosition());
+        playerDTO.setAvatar(playerDTO.getAvatar());
+        playerDTO.setTeamId(playerDTO.getTeamId());
 
-        return playerRepository.save(player) != null;
+        return playerRepository.save(playerDTO) != null;
     }
 }
